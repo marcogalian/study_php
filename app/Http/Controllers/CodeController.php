@@ -15,7 +15,7 @@ class CodeController extends Controller
     public function index()
     {
         return Inertia::render('Codes/Index', [
-
+            'codes' => Code::with('user:id,name')->latest()->get()
         ]);
     }
 

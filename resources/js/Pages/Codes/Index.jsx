@@ -3,8 +3,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import InputError from '@/Components/InputError'
 import { useForm, Head } from '@inertiajs/react'
 import PrimaryButton from '@/Components/PrimaryButton'
+import Code from '@/Components/Code'
 
-const Index = ({auth}) => {
+
+const Index = ({auth, codes}) => {
     const {data, setData, post, processing, reset, errors} = useForm({
         title: '',
         code: ''
@@ -48,6 +50,14 @@ const Index = ({auth}) => {
 
                 </PrimaryButton>
             </form>
+
+            <div className='mt-6 bg-white shadow-sm rounded-md divide-y'>
+                {
+                    codes.map(code => 
+                        <Code key={code.id} code={code} />
+
+                )}
+            </div>
 
         </div>
     </AuthenticatedLayout>
