@@ -12,6 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        // Para llamar a nuestro seeders UserSeeder escribimos por consola lo siguiente: php artisan db:seed
+        $this->call(UserSeeder::class);
+
+
+
+        //Esto de abajo es otra forma de agregar seeders.
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
