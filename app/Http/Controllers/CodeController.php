@@ -24,12 +24,13 @@ class CodeController extends Controller
      */
     // public function create()
     // {
-        
+
     // }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -68,7 +69,21 @@ class CodeController extends Controller
      */
     public function update(Request $request, Code $code)
     {
-        //
+        $this->authorize('update', $code);
+
+        $validated = $request->validate([
+            'title' => 'required|unique:codes,title|min:3|max:100',
+            'code' => 'nullable|'
+        ], [
+            'title.required' => 'El Titulo es requerido',
+            'title.min' => 'El titulo debe tener al menos :min caracteres',
+            'title.max' => 'El titulo no debe sobrepasar los :max caracteres',
+            'title.unique' => 'Ya existe un titulo con el mismo nombre',
+        ]);
+
+        $code->update($validated);
+
+        return redirect( route('codes.index'));
     }
 
     /**
@@ -76,6 +91,10 @@ class CodeController extends Controller
      */
     public function destroy(Code $code)
     {
-        //
+        $this->authorize('delete', $code);
+
+        $code->delete();
+
+        return redirect(route('codes.index'));
     }
 }
