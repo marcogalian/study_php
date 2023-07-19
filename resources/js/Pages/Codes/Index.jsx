@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import InputError from '@/Components/InputError'
 import { useForm, Head } from '@inertiajs/react'
 import PrimaryButton from '@/Components/PrimaryButton'
 import Code from '@/Components/Code'
-
+import ConfirmModal from '@/Components/ConfirmModal'
 
 const Index = ({auth, codes}) => {
     const {data, setData, post, processing, reset, errors} = useForm({
@@ -17,6 +17,8 @@ const Index = ({auth, codes}) => {
         // onSuccess: () => llama al metodo reset(), esto quiere decir que si se ha enviado correctamente el formulario 'onSuccess', resetees los campos.
         post( route('codes.store'), {onSuccess: () => reset()})
     }
+
+    const [stateModal, changeStateModal] = useState(false);
 
   return (
     <AuthenticatedLayout user={auth.user}>
@@ -60,6 +62,13 @@ const Index = ({auth, codes}) => {
 
                 )}
             </div>
+
+            <ConfirmModal
+                stateNormal={stateModal}
+                changeState={changeStateModal}
+            >
+                <h1>Hola Mundo</h1>
+            </ConfirmModal>
 
         </div>
     </AuthenticatedLayout>
