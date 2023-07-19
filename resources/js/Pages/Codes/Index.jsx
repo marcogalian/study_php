@@ -11,17 +11,19 @@ const Index = ({auth, codes}) => {
         title: '',
         code: ''
     })
+
     const submit = (e) => {
         e.preventDefault()
         // onSuccess: () => llama al metodo reset(), esto quiere decir que si se ha enviado correctamente el formulario 'onSuccess', resetees los campos.
         post( route('codes.store'), {onSuccess: () => reset()})
     }
+
   return (
     <AuthenticatedLayout user={auth.user}>
         <Head title='Index Code' />
         <div className='max-w-2xl mx-auto p-4 sm:p-6 lg:p-8'>
             <form onSubmit={submit}>
-                <input 
+                <input
                     value={data.title}
                     onChange={e => setData('title', e.target.value)}
                     type='text'
@@ -42,7 +44,7 @@ const Index = ({auth, codes}) => {
                 </textarea>
                 <InputError message={errors.code} className='mt-2' />
 
-                <PrimaryButton 
+                <PrimaryButton
                     className='mt-4 w-full bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl font-medium px-6 py-2.5 shadow-md'
                     disabled = {processing}
                 >
@@ -51,9 +53,9 @@ const Index = ({auth, codes}) => {
                 </PrimaryButton>
             </form>
 
-            <div className='mt-6 bg-white shadow-sm rounded-md divide-y'>
+            <div className='mt-8 bg-white shadow-sm rounded-md divide-y-2'>
                 {
-                    codes.map(code => 
+                    codes.map(code =>
                         <Code key={code.id} code={code} />
 
                 )}

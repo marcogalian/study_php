@@ -32,8 +32,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/codes/index', [CodeController::class, 'index'])->name('codes.index');
     Route::post('/codes', [CodeController::class, 'store'])->name('codes.store');
-    // Route::put('/codes/{code}/update', [CodeController::class, 'update'])->name('codes.update');
-    // Route::delete('/codes/{code}/destroy', [CodeController::class, 'destroy'])->name('codes.destroy');
+    Route::patch('/codes/{code}/update', [CodeController::class, 'update'])->name('codes.update');
+    Route::delete('/codes/{code}/destroy', [CodeController::class, 'destroy'])->name('codes.destroy');
 });
 
 // Route::get('/codes/create', [CodeController::class, 'create'])->name('codes.create');
