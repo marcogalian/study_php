@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import InputError from '@/Components/InputError'
 import { useForm, Head } from '@inertiajs/react'
 import PrimaryButton from '@/Components/PrimaryButton'
 import Code from '@/Components/Code'
-
+import ConfirmModal from '@/Components/ConfirmModal'
 
 const Index = ({auth, codes}) => {
     const {data, setData, post, processing, reset, errors} = useForm({
@@ -17,6 +17,17 @@ const Index = ({auth, codes}) => {
         // onSuccess: () => llama al metodo reset(), esto quiere decir que si se ha enviado correctamente el formulario 'onSuccess', resetees los campos.
         post( route('codes.store'), {onSuccess: () => reset()})
     }
+
+    const [stateModal, changeStateModal] = useState(false);
+
+    const handleDelete = (postId) => {
+        // Llamar a la ruta 'codes.destroy' con el ID del post a eliminar
+        axios.delete(route('codes.destroy', postId)).then(() => {
+          // Si se eliminó correctamente, actualiza la lista de posts sin el post eliminado
+          const updatedCodes = codes.filter((code) => code.id !== postId);
+          setData('codes', updatedCodes);
+        });
+    };
 
   return (
     <AuthenticatedLayout user={auth.user}>
@@ -53,13 +64,15 @@ const Index = ({auth, codes}) => {
                 </PrimaryButton>
             </form>
 
-            <div className='mt-6 bg-white shadow-sm rounded-md divide-y'>
+            <div className='mt-8 bg-white shadow-sm rounded-md divide-y-2'>
                 {
                     codes.map(code =>
-                        <Code key={code.id} code={code} />
+                        <Code key={code.id} code={code} changeStateModal={changeStateModal} />
 
                 )}
             </div>
+
+            <ConfirmModal stateModal={stateModal} changeStateModal={changeStateModal} />
 
         </div>
     </AuthenticatedLayout>
