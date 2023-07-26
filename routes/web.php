@@ -18,15 +18,24 @@ use Inertia\Inertia;
 |
 */
 
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//     ]);
+// });
+
+// Route::get('/', [CodeController::class, 'welcome'])->name('welcome');
+
 Route::get('/', function () {
+    $codes = Code::with('user:id,name')->latest()->get();
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'index' => Route::has('codes.index'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'codes' => $codes
     ]);
-});
+})->name('welcome');
 
 
 Route::middleware('auth')->group(function () {

@@ -6,6 +6,8 @@ use App\Models\Code;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
 
 class CodeController extends Controller
 {
@@ -18,6 +20,18 @@ class CodeController extends Controller
             'codes' => Code::with('user:id,name')->latest()->get()
         ]);
     }
+
+    public function welcome()
+    {
+        $codes = Code::with('user:id,name')->latest()->get();
+
+        return Inertia::render('Welcome', [
+            'codes' => $codes,
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register')
+        ]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

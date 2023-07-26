@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 // import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 // import { vs } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -8,11 +8,12 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm, usePage } from '@inertiajs/react';
 
-const Code = ({ code }) => {
+
+const Code = ({ code, idPost}) => {
     const { auth } = usePage().props;
     const [editing, setEditing] = useState(false);
 
-    const { data, setData, patch, processing, reset, errors } = useForm({
+    const { data, setData, patch, processing, reset, errors, clearErrors } = useForm({
         title: code.title,
         code: code.code
     })
@@ -38,7 +39,7 @@ const Code = ({ code }) => {
                         {code.created_at !== code.updated_at && <small className="text-sm text-gray-600"> &middot; edited</small>}
 
                     </div>
-                    {code.user.id === auth.user.id &&
+                    {auth.user && code.user.id === auth.user.id &&
                         /* Si el usuario que ha escrito el post es el mismo que esta autenticado, entonces se muestran los 3 puntitos y puede hacer dropdown para utilizar las opciones y asi modificar su propio post */
                         <Dropdown>
                             <Dropdown.Trigger>
@@ -52,12 +53,20 @@ const Code = ({ code }) => {
                                 <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" onClick={() => setEditing(true)}>
                                     Edit
                                 </button>
-                                <Dropdown.Link
+                                {/* <Dropdown.Link
                                     as="button"
                                     href={route('codes.destroy', code.id)}
                                     method="delete">
                                     Delete
-                                </Dropdown.Link>
+                                </Dropdown.Link> */}
+                                <button
+                                    className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out"
+                                    onClick={() =>{ 
+                                        console.log("Botón Delete clickeado");
+                                        idPost(code.id);}}
+                                >
+                                    Delete
+                                </button>
                             </Dropdown.Content>
 
                         </Dropdown>
@@ -67,13 +76,18 @@ const Code = ({ code }) => {
                 {editing
                     ? <form onSubmit={submit}>
                         <input
+                            name='title'
+                            id='title'
                             value={data.title}
                             onChange={e => setData('title', e.target.value)}
                             type='text'
                             className='mb-3 block w-full border-gray-300 focus:border-indigo-300 focu:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-md'
                             autoFocus
                         />
+                        <InputError message={errors.title} className="mt-2" />
                         <textarea
+                            name='code'
+                            id='code'
                             value={data.code}
                             onChange={e => setData('code', e.target.value)}
                             className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
@@ -87,6 +101,7 @@ const Code = ({ code }) => {
                                 Save
                             </PrimaryButton>
                             <button
+                                type='button'
                                 className="mt-4"
                                 onClick={() => { setEditing(false); reset(); clearErrors(); }}
                             >

@@ -1,11 +1,15 @@
+import Code from '@/Components/Code';
 import { Link, Head } from '@inertiajs/react';
 
-export default function Welcome({ auth }) {
+
+const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) => {
+
+    
     return (
         <>
             <Head title="Welcome" />
-            <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
+            <div className="relative ">
+                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right bg-gray-300 w-full">
                     {auth.user ? (
                         <Link
                             href={route('dashboard')}
@@ -31,7 +35,25 @@ export default function Welcome({ auth }) {
                         </>
                     )}
                 </div>
+                <div className='max-w-2xl mx-auto p-4 sm:p-6 lg:p-8'>
+                    <div className='mt-8 bg-white shadow-sm rounded-md divide-y-2'>
+                        {
+                            codes.map(code =>
+                                <Code 
+                                    key={code.id} 
+                                    code={code}
+                                    changeStateModal={changeStateModal} 
+                                    postId={postId}
+                                    deletePost={deletePost}
+                                    idPost={idPost}
+                                />
+
+                        )}
+                    </div>
+                </div>
             </div>
         </>
     );
 }
+
+export default Welcome
