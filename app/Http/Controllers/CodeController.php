@@ -17,13 +17,13 @@ class CodeController extends Controller
     public function index()
     {
         return Inertia::render('Codes/Index', [
-            'codes' => Code::with('user:id,name')->latest()->get()
+            'codes' => Code::with('user:id,name')->orderBy('created_at', 'asc')->get()
         ]);
     }
 
     public function welcome()
     {
-        $codes = Code::with('user:id,name')->latest()->get();
+        $codes = Code::with('user:id,name')->orderBy('created_at', 'asc')->get();
 
         return Inertia::render('Welcome', [
             'codes' => $codes,
