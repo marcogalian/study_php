@@ -31,6 +31,14 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        // Verificar si ya hay un usuario registrado
+        if (User::count() > 0) {
+            // Si hay un usuario registrado, redirigir al formulario de inicio de sesión con un mensaje flash
+            return redirect()->route('login')->with('status', 'El registro de nuevos usuarios está deshabilitado.');
+        }
+
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:'.User::class,
