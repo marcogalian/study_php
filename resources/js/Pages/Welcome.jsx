@@ -8,7 +8,7 @@ const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) 
     return (
         <>
             <Head title="Welcome" />
-            <div className="relative bg-slate-100 h-screen w-full">
+            <div className="relative bg-slate-100 h-full w-full">
                 <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right bg-gray-200 w-full">
                     {auth.user ? (
                         <Link
@@ -35,21 +35,19 @@ const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) 
                         </>
                     )}
                 </div>
-                <div className='max-w-2xl mx-auto p-4 sm:p-6 lg:p-8'>
-                    <div className='mt-24 bg-white shadow-sm rounded-md divide-y-8 divide-slate-100'>
-                        {
-                            codes.map(code =>
-                                <Code 
-                                    key={code.id} 
+                <div className='max-w-2xl mx-auto p-4 sm:p-6 lg:p-8 mt-20'>
+                    {
+                        codes.map(code =>
+                            <div key={code.id} className='bg-white shadow-sm rounded-md mb-4'>
+                                <Code  
                                     code={code}
                                     changeStateModal={changeStateModal} 
                                     postId={postId}
                                     deletePost={deletePost}
                                     idPost={idPost}
                                 />
-
-                        )}
-                    </div>
+                            </div>
+                    )}
                 </div>
             </div>
         </>
