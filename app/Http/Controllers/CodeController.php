@@ -23,7 +23,7 @@ class CodeController extends Controller
 
     public function welcome()
     {
-        $codes = Code::with('user:id,name')->orderBy('created_at', 'asc')->get();
+        $codes = Code::with('user:id,name')->get();
 
         return Inertia::render('Welcome', [
             'codes' => $codes,

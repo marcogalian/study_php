@@ -25,19 +25,20 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-// Route::get('/', [CodeController::class, 'welcome'])->name('welcome');
 
-Route::get('/', function () {
-    $codes = Code::with('user:id,name')->latest()->get();
+// Route::get('/', function () {
+    //     $codes = Code::with('user:id,name')->latest()->get();
+    
+    //     return Inertia::render('Welcome', [
+        //         'canLogin' => Route::has('login'),
+        //         'canRegister' => Route::has('register'),
+        //         'codes' => $codes
+        //     ]);
+// })->name('welcome');
+        
 
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'codes' => $codes
-    ]);
-})->name('welcome');
-
-
+Route::get('/', [CodeController::class, 'welcome'])->name('welcome');
+        
 Route::middleware('auth')->group(function () {
     Route::get('/codes/index', [CodeController::class, 'index'])->name('codes.index');
     Route::post('/codes', [CodeController::class, 'store'])->name('codes.store');
