@@ -9,8 +9,6 @@ import { router } from '@inertiajs/react'
 
 const Index = ({auth, codes}) => {
 
-    console.log(codes);
-
     const {data, setData, post, processing, reset, errors} = useForm({
         title: '',
         code: ''
@@ -21,6 +19,8 @@ const Index = ({auth, codes}) => {
         // onSuccess: () => llama al metodo reset(), esto quiere decir que si se ha enviado correctamente el formulario 'onSuccess', resetees los campos.
         post( route('codes.store'), {onSuccess: () => reset()})
     }
+
+    const showEditDelete = true;
 
     const [stateModal, changeStateModal] = useState(false);
 
@@ -37,7 +37,6 @@ const Index = ({auth, codes}) => {
     const idPost = (codeId) => {
         setPostId(codeId);
         changeStateModal(true);
-        console.log("Después de setPostId:", codeId);
     }
     
 
@@ -90,6 +89,7 @@ const Index = ({auth, codes}) => {
                                 postId={postId}
                                 deletePost={deletePost}
                                 idPost={idPost}
+                                showEditDelete={showEditDelete}
                             />
                         </div>
                 )}

@@ -9,7 +9,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm, usePage } from '@inertiajs/react';
 
 
-const Code = ({ code, idPost}) => {
+const Code = ({ code, idPost, showEditDelete}) => {
     const { auth } = usePage().props;
     const [editing, setEditing] = useState(false);
 
@@ -39,7 +39,8 @@ const Code = ({ code, idPost}) => {
                         {code.created_at !== code.updated_at && <small className="text-sm text-gray-600"> &middot; edited</small>}
 
                     </div>
-                    {auth.user && code.user.id === auth.user.id &&
+                    {/* {auth.user && code.user.id === auth.user.id && */}
+                    {showEditDelete &&
                         /* Si el usuario que ha escrito el post es el mismo que esta autenticado, entonces se muestran los 3 puntitos y puede hacer dropdown para utilizar las opciones y asi modificar su propio post */
                         <Dropdown>
                             <Dropdown.Trigger>
@@ -62,7 +63,6 @@ const Code = ({ code, idPost}) => {
                                 <button
                                     className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out"
                                     onClick={() =>{ 
-                                        console.log("Botón Delete clickeado");
                                         idPost(code.id);}}
                                 >
                                     Delete

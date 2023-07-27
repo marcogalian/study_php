@@ -1,7 +1,6 @@
 import React from 'react'
 
 
-
 const ConfirmModal = ({stateModal, changeStateModal, deletePost}) => {
 
   return (

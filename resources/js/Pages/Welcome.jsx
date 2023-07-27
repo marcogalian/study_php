@@ -1,9 +1,10 @@
 import Code from '@/Components/Code';
+import React from 'react'
+import ConfirmModal from '@/Components/ConfirmModal';
 import { Link, Head } from '@inertiajs/react';
 
 
 const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) => {
-
     
     return (
         <>
@@ -49,6 +50,13 @@ const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) 
                             </div>
                     )}
                 </div>
+
+                <ConfirmModal
+                    changeStateModal={changeStateModal}
+                    postId={postId}
+                    deletePost={deletePost}
+                    idPost={idPost}  
+                />
             </div>
         </>
     );
