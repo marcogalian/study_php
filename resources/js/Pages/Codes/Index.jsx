@@ -79,23 +79,6 @@ const Index = ({auth, codes}) => {
                 </PrimaryButton>
             </form>
 
-            <div className='max-w-2xl mx-auto p-4 sm:p-6 lg:p-8 mt-2'>
-                {
-                    codes.map(code =>
-                        <div key={code.id} className='bg-white shadow-sm rounded-md mb-4 overflow-auto'>
-                            <Code  
-                                code={code}
-                                changeStateModal={changeStateModal} 
-                                postId={postId}
-                                deletePost={deletePost}
-                                idPost={idPost}
-                                showEditDelete={showEditDelete}
-                            />
-                        </div>
-                )}
-            </div>
-
-
             <ConfirmModal
                 stateModal={stateModal}
                 changeStateModal={changeStateModal}
@@ -105,6 +88,21 @@ const Index = ({auth, codes}) => {
             >
             </ConfirmModal>
 
+        </div>
+        <div className='max-w-4xl mx-auto sm:p-6 lg:p-8 mt-2'>
+            {
+                codes.map(code =>
+                    <div key={code.id} className='w-full bg-white shadow-sm rounded-md mb-4'>
+                        <Code  
+                            code={code}
+                            changeStateModal={changeStateModal} 
+                            postId={postId}
+                            deletePost={deletePost}
+                            idPost={idPost}
+                            showEditDelete={showEditDelete}
+                        />
+                    </div>
+            )}
         </div>
     </AuthenticatedLayout>
   )

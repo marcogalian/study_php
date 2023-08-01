@@ -36,20 +36,6 @@ const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) 
                         </>
                     )}
                 </div>
-                <div className='max-w-2xl mx-auto p-4 sm:p-6 lg:p-8 mt-20'>
-                    {
-                        codes.map(code =>
-                            <div key={code.id} className='bg-white shadow-sm rounded-md mb-4 overflow-auto'>
-                                <Code  
-                                    code={code}
-                                    changeStateModal={changeStateModal} 
-                                    postId={postId}
-                                    deletePost={deletePost}
-                                    idPost={idPost}
-                                />
-                            </div>
-                    )}
-                </div>
 
                 <ConfirmModal
                     changeStateModal={changeStateModal}
@@ -57,6 +43,21 @@ const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) 
                     deletePost={deletePost}
                     idPost={idPost}  
                 />
+            </div>
+            <div className='max-w-4xl mx-auto sm:p-6 lg:p-8 mt-2'>
+                {
+                    codes.map(code =>
+                        <div key={code.id} className='w-full bg-white shadow-sm rounded-md mb-4'>
+                            <Code  
+                                code={code}
+                                changeStateModal={changeStateModal} 
+                                postId={postId}
+                                deletePost={deletePost}
+                                idPost={idPost}
+                                showEditDelete={showEditDelete}
+                            />
+                        </div>
+                )}
             </div>
         </>
     );
