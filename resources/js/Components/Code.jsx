@@ -9,7 +9,6 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm, usePage } from '@inertiajs/react';
 
 
-
 const Code = ({ code, idPost, showEditDelete}) => {
     const { auth } = usePage().props;
     const [editing, setEditing] = useState(false);
@@ -115,7 +114,7 @@ const Code = ({ code, idPost, showEditDelete}) => {
                             <p className="mt-4 text-lg text-gray-900">{code.title}</p>
 
                             {/* <p className="mt-4 text-lg text-gray-900">{code.code}</p> */}
-                            <div className='w-full overflow-auto'>
+                            <div className="w-full overflow-auto">
                                 <SyntaxHighlighter language="php" style={dracula}>
                                     {code.code}
                                 </SyntaxHighlighter>

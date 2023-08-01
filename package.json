@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "react-syntax-highlighter": "^15.5.0",
-        "styled-components": "^6.0.4"
+        "styled-components": "^6.0.4",
+        "tw-elements": "^1.0.0-beta3"
     }
 }
