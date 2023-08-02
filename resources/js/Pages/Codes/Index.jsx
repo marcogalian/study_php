@@ -20,7 +20,7 @@ const Index = ({auth, codes}) => {
         post( route('codes.store'), {onSuccess: () => reset()})
     }
 
-    const showEditDelete = true;
+    let showEditDelete = true;
 
     const [stateModal, changeStateModal] = useState(false);
 

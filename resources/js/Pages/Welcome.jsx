@@ -6,11 +6,13 @@ import { Link, Head } from '@inertiajs/react';
 
 const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) => {
     
+    let showEditDelete = false;
+
     return (
         <>
             <Head title="Welcome" />
             <div className="relative bg-slate-100 h-full w-full">
-                <div className="sm:fixed sm:top-0 sm:right-0 p-6 text-right bg-white shadow-md w-full">
+                <div className="z-10 sm:fixed sm:top-0 sm:right-0 p-6 text-right bg-white shadow-md w-full">
                     {auth.user ? (
                         <Link
                             href={route('dashboard')}
@@ -44,7 +46,7 @@ const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) 
                     idPost={idPost}  
                 />
             </div>
-            <div className='max-w-4xl mx-auto sm:p-6 lg:p-8 mt-2'>
+            <div className='max-w-4xl mx-auto sm:p-6 lg:p-8 mt-20'>
                 {
                     codes.map(code =>
                         <div key={code.id} className='w-full bg-white shadow-sm rounded-md mb-4'>
