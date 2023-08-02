@@ -90,7 +90,8 @@ const Code = ({ code, idPost, showEditDelete}) => {
                             id='code'
                             value={data.code}
                             onChange={e => setData('code', e.target.value)}
-                            className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                            className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize-none"
+                            rows="14"
                         >
                         </textarea>
                         <InputError message={errors.code} className="mt-2" />

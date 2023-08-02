@@ -4,9 +4,7 @@ import ConfirmModal from '@/Components/ConfirmModal';
 import { Link, Head } from '@inertiajs/react';
 
 
-const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) => {
-    
-    let showEditDelete = false;
+const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost}) => {
 
     return (
         <>
@@ -56,7 +54,6 @@ const Welcome = ({ auth, codes, changeStateModal, postId, deletePost, idPost }) 
                                 postId={postId}
                                 deletePost={deletePost}
                                 idPost={idPost}
-                                showEditDelete={showEditDelete}
                             />
                         </div>
                 )}
