@@ -15,8 +15,12 @@ export default function Authenticated({ user, header, children }) {
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
-                                <Link href="/">
+                                {/* <Link href="/">
                                     <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                </Link> */}
+
+                                <Link href="/">
+                                    <a className='text-[1.5rem] text-blue-500 hover:text-blue-700 transition ease-in-out duration-300'><i className="fa-solid fa-house"></i></a>
                                 </Link>
                             </div>
 
